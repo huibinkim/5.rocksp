@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 
-import RSP from "./RSP.jsx";
+import RSP from "./RSP";
 ReactDom.render(<RSP />, document.querySelector("#root"));
 // const React = require("react");
 // const ReactDom = require("react-dom/client");
