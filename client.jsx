@@ -1,8 +1,8 @@
 import React from "react";
-import ReactDom from "react-dom";
+import ReactDom from "react-dom/client";
 
 import RSP from "./RSPhooks";
-ReactDom.render(<RSP />, document.querySelector("#root"));
+ReactDom.createRoot(document.querySelector("#root")).render(<RSP />);
 // const React = require("react");
 // const ReactDom = require("react-dom/client");
 // const ResponseCheck = require("./ResponseCheck");

@@ -26,12 +26,11 @@ const RSP = () => {
   const [result, setResult] = useState("");
   const [imgCoord, setImgCoord] = useState(rspCoords.바위);
   const [score, setScore] = useState(0);
-  const [isRunning, setIsRunning] = useState(true);
-  // const interval = useRef();
+  const interval = useRef();
 
   //useLayoutEffect() >>> useEffect와 거의 동일하나, 화면 바뀌기 전에 감지한다.
   //componentDidMout, componentDidUpdate 역할 (1대1 대응은 아님)
-  /*
+
   useEffect(() => {
     interval.current = setInterval(changeHand, 100);
     return () => {
@@ -41,7 +40,7 @@ const RSP = () => {
     //이는 그냥 setTimeout을 하는 것과 동일하다.
   }, [imgCoord]); //[]안의 코드가 바뀔때마다 useEffect 안의 내용이 계속 실행됨. 따라서 이는 componentDidUpdate 역할과 동일
   //[] 가 closure 문제를 해결해줌
-  */
+
   const changeHand = () => {
     if (imgCoord === rspCoords.바위) {
       setImgCoord(rspCoords.가위);
@@ -51,11 +50,11 @@ const RSP = () => {
       setImgCoord(rspCoords.바위);
     }
   };
-  useInterval(changeHand, isRunning ? 100 : null);
-  const onClickBtn = (choice) => () => {
-    if (isRunning) {
-      setIsRunning(false); //움직이는 이미지 멈추고 점수 계산
 
+  const onClickBtn = (choice) => () => {
+    if (interval.current) {
+      clearInterval(interval.current); //움직이는 이미지 멈추고 점수 계산
+      interval.current = null;
       const myScore = scores[choice];
       const cpuScore = scores[comChoice(imgCoord)];
       const diff = myScore - cpuScore;
@@ -74,8 +73,8 @@ const RSP = () => {
       }
       setTimeout(() => {
         //2초 결과확인 시간 후에
-        setIsRunning(true); //다시 손움직이기
-      }, 1000);
+        interval.current = setInterval(changeHand, 100); //다시 손움직이기
+      }, 2000);
     }
   };
   return (
