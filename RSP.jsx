@@ -43,7 +43,7 @@ class RSP extends Component {
   changeHand = () => {
     //손바꾸기
     const { imgCoord } = this.state;
-    console.log("fsf", this.state.imgCoord, rspCoords.가위);
+    // console.log("fsf", this.state.imgCoord, rspCoords.가위);
     if (imgCoord === rspCoords.바위) {
       this.setState({
         imgCoord: rspCoords.가위,
